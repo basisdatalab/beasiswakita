@@ -5,10 +5,12 @@ BeasiswaKita is simple scholarship tools for organizations and scholarship hunte
 ### Environment Setup
 Make sure:
 - `go` and `mysql` has been installed
+- `$GOPATH` exist in your path
 
 1. Get this repository
     ```
     $ go get github.com/harkce/beasiswakita
+    $ cd beasiswakita
     ```
 2. Set up development environtment
     ```
