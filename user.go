@@ -1,4 +1,4 @@
-package beasiswakita
+package main
 
 // User hold record of all registered user
 type User struct {
