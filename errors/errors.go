@@ -5,9 +5,9 @@ import (
 )
 
 type Error struct {
-	Code    int
-	Message string
-	Field   string
+	Code    int    `json:"code,omitempty"`
+	Message string `json:"message,omitempty"`
+	Field   string `json:"field,omitempty"`
 }
 
 func (e *Error) Error() string {

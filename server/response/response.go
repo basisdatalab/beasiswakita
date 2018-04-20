@@ -116,7 +116,8 @@ func Errors(status int, w http.ResponseWriter, errs []errors.Error) {
 	SendError(status, w, errs)
 }
 
-func Error(w http.ResponseWriter, err errors.Error) {
+func Error(w http.ResponseWriter, errs error) {
+	err := errs.(*errors.Error)
 	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(err.Code)
 

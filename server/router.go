@@ -1,7 +1,9 @@
-package router
+package server
 
 import (
 	"net/http"
+
+	"github.com/harkce/beasiswakita/user"
 
 	"github.com/goware/cors"
 	"github.com/julienschmidt/httprouter"
@@ -15,6 +17,10 @@ func Router() http.Handler {
 		AllowedHeaders: []string{"*"},
 		MaxAge:         86400,
 	})
+
+	userHandler := user.UserHandler{}
+	router.POST("/users", userHandler.Register)
+	router.POST("/login", userHandler.Login)
 
 	return cors.Handler(router)
 }
