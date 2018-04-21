@@ -10,7 +10,7 @@ Make sure:
 1. Get this repository
     ```
     $ go get github.com/harkce/beasiswakita
-    $ cd beasiswakita
+    $ cd $GOPATH/src/github.com/harkce/beasiswakita/
     ```
 2. Set up development environtment
     ```
@@ -22,7 +22,7 @@ Make sure:
     ```
 3. Install dependencies
     ```
-    $ make dep
+    $ make init
     ```
 3. Init database
     ```
@@ -58,4 +58,7 @@ Build project using build commnd.
 Run project by executing:
   ```
   $ ./bin/beasiswakita
+If you add more dependencies to the project, don't forget to `dep ensure`
+  ```
+  $ dep ensure
   ```
