@@ -5,6 +5,9 @@ init:
 	go get -u github.com/Fs02/kamimai/cmd/kamimai
 	dep ensure
 
+build:
+	go build -o bin/beasiswakita app/main.go
+
 migrate:
 	export $$(cat .env | grep -v ^\# | xargs) && \
 	kamimai --driver=mysql --dsn="mysql://$$DEVELOPMENT_DATABASE_URL" --directory=./db/migrations sync

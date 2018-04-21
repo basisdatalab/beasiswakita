@@ -49,3 +49,13 @@ Run rollback to revert a migration
   ```
   $ make rollback
   ```
+
+### Build Project
+Build project using build commnd.
+  ```
+  $ make build
+  ```
+Run project by executing:
+  ```
+  $ ./bin/beasiswakita
+  ```
