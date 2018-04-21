@@ -58,6 +58,9 @@ func AddStudent(userID int, data map[string]string) error {
 		return err
 	}
 
+	student.CreatedAt = time.Now()
+	student.UpdatedAt = time.Now()
+
 	student.UserID = userID
 	err = beasiswakita.Transaction.Insert(&student)
 	if err != nil {
