@@ -28,6 +28,7 @@ func Router() http.Handler {
 	router.PUT("/boards", boardHandler.Update)
 	router.PATCH("/boards/:boardID/state", boardHandler.State)
 	router.DELETE("/boards", boardHandler.Delete)
+	router.GET("/boards", boardHandler.Get)
 
 	return cors.Handler(router)
 }

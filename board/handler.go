@@ -203,3 +203,22 @@ func (h *BoardHandler) Delete(w http.ResponseWriter, r *http.Request, _ httprout
 	response.OK(w, deletedBoard)
 	return
 }
+
+func (h *BoardHandler) Get(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	if err != nil {
+		response.Error(w, errors.Unauthorized)
+		log.Println(err)
+		return
+	}
+
+	boards, err := GetBoards(owner.ID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, boards)
+	return
+}
