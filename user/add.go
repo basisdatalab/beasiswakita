@@ -47,11 +47,26 @@ func AddUser(user beasiswakita.User) (beasiswakita.User, error) {
 	return user, nil
 }
 
-func AddOrganization(userID int, data map[string]string) error {
+func AddOrganization(userID int, data map[string]interface{}) error {
+	var organization beasiswakita.Organization
+	err := organization.Parse(data)
+	if err != nil {
+		return err
+	}
+
+	organization.CreatedAt = time.Now()
+	organization.UpdatedAt = time.Now()
+
+	organization.UserID = userID
+	err = beasiswakita.Transaction.Insert(&organization)
+	if err != nil {
+		return err
+	}
+
 	return nil
 }
 
-func AddStudent(userID int, data map[string]string) error {
+func AddStudent(userID int, data map[string]interface{}) error {
 	var student beasiswakita.Student
 	err := student.Parse(data)
 	if err != nil {
