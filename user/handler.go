@@ -102,3 +102,22 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request, _ httprouter
 		token,
 	})
 }
+
+func (h *UserHandler) Me(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	if err != nil {
+		response.Error(w, errors.Unauthorized)
+		log.Println(err)
+		return
+	}
+
+	user, err := GetUser(owner.ID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, user)
+	return
+}

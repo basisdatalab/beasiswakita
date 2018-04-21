@@ -7,14 +7,14 @@ import (
 
 // User hold record of all registered user
 type User struct {
-	ID              int               `db:"id" json:"id"`
-	EmailAddress    string            `db:"email_address" json:"email_address"`
-	Password        string            `db:"password" json:"password,omitempty"`
-	PasswordConfirm string            `db:"-" json:"password_confirm,omitempty"`
-	Role            string            `db:"role" json:"role"`
-	UserData        map[string]string `db:"-" json:"user_data"`
-	CreatedAt       time.Time         `db:"created_at" json:"created_at"`
-	UpdatedAt       time.Time         `db:"updated_at" json:"updated_at"`
+	ID              int                    `db:"id" json:"id"`
+	EmailAddress    string                 `db:"email_address" json:"email_address"`
+	Password        string                 `db:"password" json:"password,omitempty"`
+	PasswordConfirm string                 `db:"-" json:"password_confirm,omitempty"`
+	Role            string                 `db:"role" json:"role"`
+	UserData        map[string]interface{} `db:"-" json:"user_data"`
+	CreatedAt       time.Time              `db:"created_at" json:"created_at"`
+	UpdatedAt       time.Time              `db:"updated_at" json:"updated_at"`
 }
 
 func (u *User) Validate() error {

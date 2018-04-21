@@ -22,6 +22,7 @@ func Router() http.Handler {
 	userHandler := user.UserHandler{}
 	router.POST("/users", userHandler.Register)
 	router.POST("/login", userHandler.Login)
+	router.GET("/me", userHandler.Me)
 
 	boardHandler := board.BoardHandler{}
 	router.POST("/boards", boardHandler.Create)
