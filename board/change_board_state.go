@@ -2,6 +2,7 @@ package board
 
 import (
 	"errors"
+	"time"
 
 	"github.com/harkce/beasiswakita"
 )
@@ -19,6 +20,8 @@ func ChangeBoardState(ID int, state int) error {
 	if err != nil {
 		return err
 	}
+
+	board.UpdatedAt = time.Now()
 
 	col, err := beasiswakita.Transaction.Update(&board)
 	if err != nil {
