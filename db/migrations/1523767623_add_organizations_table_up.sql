@@ -4,7 +4,7 @@ CREATE TABLE organizations (
 	position varchar(50) NOT NULL,
 	organization_name varchar(100) NOT NULL,
 	organization_email varchar(50) NOT NULL,
-	company_address varchar(255),
+	address varchar(255) NOT NULL,
 	city varchar(50) NOT NULL,
 	region varchar(50) NOT NULL,
 	country varchar(50) NOT NULL,
