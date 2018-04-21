@@ -8,5 +8,5 @@ CREATE TABLE student_boards (
     created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
     PRIMARY KEY(id),
-    FOREIGN KEY (student_id) REFERENCES students (id)
+    FOREIGN KEY (user_id) REFERENCES users (id)
 );
