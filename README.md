@@ -58,6 +58,7 @@ Build project using build commnd.
 Run project by executing:
   ```
   $ ./bin/beasiswakita
+  ```
 If you add more dependencies to the project, don't forget to `dep ensure`
   ```
   $ dep ensure
