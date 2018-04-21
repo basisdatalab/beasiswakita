@@ -14,6 +14,8 @@ CREATE TABLE students (
 	school_region varchar(50) NOT NULL,
 	school_zipcode varchar(50),
 	user_id int(11) NOT NULL,
+	created_at datetime NOT NULL,
+	updated_at datetime NOT NULL,
 	PRIMARY KEY (id),
 	FOREIGN KEY (user_id) REFERENCES users (id)
 );
