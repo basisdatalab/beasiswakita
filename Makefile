@@ -1,8 +1,9 @@
 now = $$(date +%s)
 
-dep:
-	go get -u github.com/julienschmidt/httprouter
+init:
+	curl https://raw.githubusercontent.com/golang/dep/master/install.sh | sh
 	go get -u github.com/Fs02/kamimai/cmd/kamimai
+	dep ensure
 
 migrate:
 	export $$(cat .env | grep -v ^\# | xargs) && \
