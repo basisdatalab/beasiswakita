@@ -24,24 +24,42 @@ type Student struct {
 	UserID        int       `db:"user_id" json:"-"`
 }
 
-func (s *Student) Parse(data map[string]string) error {
-	time, err := time.Parse("2006-01-02", data["birthdate"])
+func (s *Student) Parse(data map[string]interface{}) error {
+	time, err := time.Parse("2006-01-02", data["birthdate"].(string))
 	if err != nil {
 		return err
 	}
-	s.Name = data["name"]
+	s.Name = data["name"].(string)
 	s.Birthdate = time
-	s.Address = data["address"]
-	s.City = data["city"]
-	s.Region = data["region"]
-	s.Country = data["country"]
-	s.Zipcode = data["zipcode"]
-	s.Education = data["education"]
-	s.SchoolName = data["school_name"]
-	s.SchoolAddress = data["school_address"]
-	s.SchoolCity = data["school_city"]
-	s.SchoolRegion = data["school_region"]
-	s.SchoolZipcode = data["school_zipcode"]
+	s.Address = data["address"].(string)
+	s.City = data["city"].(string)
+	s.Region = data["region"].(string)
+	s.Country = data["country"].(string)
+	s.Zipcode = data["zipcode"].(string)
+	s.Education = data["education"].(string)
+	s.SchoolName = data["school_name"].(string)
+	s.SchoolAddress = data["school_address"].(string)
+	s.SchoolCity = data["school_city"].(string)
+	s.SchoolRegion = data["school_region"].(string)
+	s.SchoolZipcode = data["school_zipcode"].(string)
 
 	return nil
+}
+
+func (s *Student) Map() map[string]interface{} {
+	data := make(map[string]interface{})
+	data["name"] = s.Name
+	data["address"] = s.Address
+	data["city"] = s.City
+	data["region"] = s.Region
+	data["country"] = s.Country
+	data["zipcode"] = s.Zipcode
+	data["education"] = s.Education
+	data["school_name"] = s.SchoolName
+	data["school_address"] = s.SchoolAddress
+	data["school_city"] = s.SchoolCity
+	data["school_region"] = s.SchoolRegion
+	data["school_zipcode"] = s.SchoolZipcode
+
+	return data
 }
