@@ -1,4 +1,4 @@
-package student_board
+package board
 
 import (
 	"log"
