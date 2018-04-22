@@ -107,7 +107,7 @@ func (h *BoardHandler) Update(w http.ResponseWriter, r *http.Request, _ httprout
 }
 
 func (h *BoardHandler) State(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	_, err := authentication.Token(r.Header.Get("Authorization"), []string{"student"})
 	if err != nil {
 		response.Error(w, errors.Unauthorized)
 		log.Println(err)
