@@ -18,8 +18,8 @@ func UpdateScholarship(s beasiswakita.Scholarship) (beasiswakita.Scholarship, er
 	currentS.Country = s.Country
 	currentS.Flag = s.Flag
 	currentS.State = s.State
-	currentS.StartDate = s.StartDate[0:10]
-	currentS.EndDate = s.EndDate[0:10]
+	currentS.StartDate = s.StartDate
+	currentS.EndDate = s.EndDate
 	currentS.Description = s.Description
 	currentS.Requirement = s.Requirement
 	currentS.UpdatedAt = time.Now()
