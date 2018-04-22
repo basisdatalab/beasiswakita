@@ -202,3 +202,58 @@ func (h *ScholarshipHandler) Update(w http.ResponseWriter, r *http.Request, _ ht
 	response.OK(w, updatedS)
 	return
 }
+
+func (h *ScholarshipHandler) State(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	_, err := authentication.Token(r.Header.Get("Authorization"), []string{"organization"})
+	if err != nil {
+		response.Error(w, errors.Unauthorized)
+		log.Println(err)
+		return
+	}
+
+	ID := ps.ByName("scholarshipID")
+	sID, err := strconv.Atoi(ID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	var state struct {
+		State int `json:"state"`
+	}
+
+	err = utils.Decode(r, &state)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	err = ChangeState(sID, state.State)
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	err = beasiswakita.Transaction.Commit()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, state)
+	return
+}

@@ -39,6 +39,7 @@ func Router() http.Handler {
 	router.GET("/scholarships", scholarshipHandler.GetAll)
 	router.GET("/scholarships/:scholarshipID", scholarshipHandler.Get)
 	router.PUT("/scholarships", scholarshipHandler.Update)
+	router.PATCH("/scholarships/:scholarshipID/state", scholarshipHandler.State)
 
 	fileHandler := file.FileHandler{}
 	public := os.Getenv("GOPATH") + "/src/github.com/harkce/beasiswakita/public"
