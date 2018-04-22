@@ -48,6 +48,7 @@ func (s *Student) Parse(data map[string]interface{}) error {
 
 func (s *Student) Map() map[string]interface{} {
 	data := make(map[string]interface{})
+	data["id"] = s.ID
 	data["name"] = s.Name
 	data["address"] = s.Address
 	data["city"] = s.City

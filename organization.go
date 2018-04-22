@@ -36,6 +36,7 @@ func (o *Organization) Parse(data map[string]interface{}) error {
 
 func (o *Organization) Map() map[string]interface{} {
 	data := make(map[string]interface{})
+	data["id"] = o.ID
 	data["name"] = o.Name
 	data["position"] = o.Position
 	data["organization_name"] = o.OrganizationName

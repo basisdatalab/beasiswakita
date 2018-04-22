@@ -90,10 +90,26 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request, _ httprouter
 		return
 	}
 
+	var profileID int64
+	if checkUser.Role == "organization" {
+		profileID, err = beasiswakita.DbMap.SelectInt("select id from organizations where user_id = ?", checkUser.ID)
+		if err != nil {
+			log.Println(err)
+			response.Error(w, errors.InternalServerError)
+		}
+	} else {
+		profileID, err = beasiswakita.DbMap.SelectInt("select id from students where user_id = ?", checkUser.ID)
+		if err != nil {
+			log.Println(err)
+			response.Error(w, errors.InternalServerError)
+		}
+	}
+
 	token, err := authentication.Authorize(authentication.Owner{
-		checkUser.ID,
-		checkUser.EmailAddress,
-		checkUser.Role,
+		ID:           checkUser.ID,
+		ProfileID:    int(profileID),
+		EmailAddress: checkUser.EmailAddress,
+		Role:         checkUser.Role,
 	}, checkUser.EmailAddress)
 
 	response.OK(w, struct {

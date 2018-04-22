@@ -13,6 +13,7 @@ import (
 // Owner is an authorized user
 type Owner struct {
 	ID           int
+	ProfileID    int
 	EmailAddress string
 	Role         string
 }
