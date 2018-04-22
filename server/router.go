@@ -37,7 +37,7 @@ func Router() http.Handler {
 	scholarshipHandler := scholarship.ScholarshipHandler{}
 	router.POST("/scholarships", scholarshipHandler.Create)
 	router.GET("/scholarships", scholarshipHandler.GetAll)
-	router.GET("/scholarships/:sholarshipID", scholarshipHandler.Get)
+	router.GET("/scholarships/:scholarshipID", scholarshipHandler.Get)
 	router.PUT("/scholarships", scholarshipHandler.Update)
 
 	fileHandler := file.FileHandler{}
