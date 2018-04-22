@@ -158,3 +158,47 @@ func (h *ScholarshipHandler) Get(w http.ResponseWriter, r *http.Request, ps http
 	response.OK(w, s)
 	return
 }
+
+func (h *ScholarshipHandler) Update(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
+	_, err := authentication.Token(r.Header.Get("Authorization"), []string{"organization"})
+	if err != nil {
+		response.Error(w, errors.Unauthorized)
+		log.Println(err)
+		return
+	}
+
+	var s beasiswakita.Scholarship
+	err = utils.Decode(r, &s)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	updatedS, err := UpdateScholarship(s)
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	err = beasiswakita.Transaction.Commit()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, updatedS)
+	return
+}
