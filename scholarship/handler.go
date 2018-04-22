@@ -138,3 +138,23 @@ func (h *ScholarshipHandler) GetAll(w http.ResponseWriter, r *http.Request, _ ht
 	response.OKMeta(w, s, meta)
 	return
 }
+
+func (h *ScholarshipHandler) Get(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	sID := ps.ByName("scholarshipID")
+	ID, err := strconv.Atoi(sID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	s, err := GetScholarship(ID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, s)
+	return
+}

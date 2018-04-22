@@ -49,3 +49,14 @@ func GetScholarships(filter map[string]string, limit int, offset int) ([]beasisw
 
 	return scholarships, int(count), nil
 }
+
+func GetScholarship(ID int) (beasiswakita.Scholarship, error) {
+	var s beasiswakita.Scholarship
+
+	err := beasiswakita.DbMap.SelectOne(&s, "select * from scholarships where ID = ?", ID)
+	if err != nil {
+		return s, err
+	}
+
+	return s, nil
+}
