@@ -69,6 +69,7 @@ func Token(tokenString string, roles []string) (Owner, error) {
 	if claims, ok := token.Claims.(*owner); ok && token.Valid {
 		return Owner{
 			ID:           claims.ID,
+			ProfileID:    claims.ProfileID,
 			EmailAddress: claims.EmailAddress,
 			Role:         claims.Role,
 		}, nil
