@@ -10,6 +10,7 @@ CREATE TABLE organizations (
 	country varchar(50) NOT NULL,
 	zipcode varchar(50),
 	website varchar(100),
+	logo varchar(100),
 	user_id int(11) NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,

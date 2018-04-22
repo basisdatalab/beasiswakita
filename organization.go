@@ -14,6 +14,7 @@ type Organization struct {
 	Country           string    `db:"country" json:"country"`
 	Zipcode           string    `db:"zipcode" json:"zipcode,omitempty"`
 	Website           string    `db:"website" json:"website,omitempty"`
+	Logo              string    `db:"logo" json:"logo,omitempty"`
 	CreatedAt         time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt         time.Time `db:"updated_at" json:"updated_at"`
 	UserID            int       `db:"user_id" json:"-"`
@@ -30,6 +31,7 @@ func (o *Organization) Parse(data map[string]interface{}) error {
 	o.Country = data["country"].(string)
 	o.Zipcode = data["zipcode"].(string)
 	o.Website = data["website"].(string)
+	o.Logo = data["logo"].(string)
 
 	return nil
 }
@@ -47,6 +49,7 @@ func (o *Organization) Map() map[string]interface{} {
 	data["country"] = o.Country
 	data["zipcode"] = o.Zipcode
 	data["website"] = o.Website
+	data["logo"] = o.Logo
 
 	return data
 }
