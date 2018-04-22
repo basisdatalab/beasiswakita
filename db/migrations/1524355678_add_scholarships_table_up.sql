@@ -1,0 +1,17 @@
+CREATE TABLE scholarships (
+    id int(11) NOT NULL AUTO_INCREMENT,
+    name varchar(100) NOT NULL,
+    country varchar(50) NOT NULL,
+    flag varchar(20) NOT NULL,
+    state int(2) NOT NULL,
+    start_date datetime NOT NULL,
+    end_date datetime NOT NULL,
+    description longtext NOT NULL,
+    requirement longtext NOT NULL,
+    organization_id int(11) NOT NULL,
+    created_at datetime NOT NULL,
+    updated_at datetime NOT NULL,
+    PRIMARY KEY (id),
+    FOREIGN KEY (organization_id) REFERENCES organizations (id),
+    INDEX organization_INDEX (organization_id ASC)
+)

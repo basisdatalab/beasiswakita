@@ -25,6 +25,8 @@ func InitDb(dsn string) error {
 	database.AddTableWithName(Organization{}, "organizations").SetKeys(true, "ID")
 	database.AddTableWithName(Student{}, "students").SetKeys(true, "ID")
 	database.AddTableWithName(StudentBoard{}, "student_boards").SetKeys(true, "ID")
+	database.AddTableWithName(Scholarship{}, "scholarships").SetKeys(true, "ID")
+
 	DbMap = database
 
 	return nil

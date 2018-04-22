@@ -4,6 +4,7 @@ import (
 	"net/http"
 
 	"github.com/harkce/beasiswakita/board"
+	"github.com/harkce/beasiswakita/scholarship"
 	"github.com/harkce/beasiswakita/user"
 
 	"github.com/goware/cors"
@@ -30,6 +31,10 @@ func Router() http.Handler {
 	router.PATCH("/boards/:boardID/state", boardHandler.State)
 	router.DELETE("/boards", boardHandler.Delete)
 	router.GET("/boards", boardHandler.Get)
+
+	scholarshipHandler := scholarship.ScholarshipHandler{}
+	router.POST("/scholarships", scholarshipHandler.Create)
+	router.GET("/scholarships", scholarshipHandler.GetAll)
 
 	return cors.Handler(router)
 }
