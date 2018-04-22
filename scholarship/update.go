@@ -2,13 +2,14 @@ package scholarship
 
 import (
 	"errors"
+	"time"
 
 	"github.com/harkce/beasiswakita"
 )
 
 func UpdateScholarship(s beasiswakita.Scholarship) (beasiswakita.Scholarship, error) {
 	var currentS beasiswakita.Scholarship
-	err := beasiswakita.DbMap.SelectOne(currentS, "select * from scholarships where id = ?", s.ID)
+	err := beasiswakita.DbMap.SelectOne(&currentS, "select * from scholarships where id = ?", s.ID)
 	if err != nil {
 		return s, nil
 	}
@@ -17,11 +18,11 @@ func UpdateScholarship(s beasiswakita.Scholarship) (beasiswakita.Scholarship, er
 	currentS.Country = s.Country
 	currentS.Flag = s.Flag
 	currentS.State = s.State
-	currentS.StartDate = s.StartDate
-	currentS.EndDate = s.EndDate
+	currentS.StartDate = s.StartDate[0:10]
+	currentS.EndDate = s.EndDate[0:10]
 	currentS.Description = s.Description
 	currentS.Requirement = s.Requirement
-	currentS.UpdatedAt = s.UpdatedAt
+	currentS.UpdatedAt = time.Now()
 
 	col, err := beasiswakita.Transaction.Update(&currentS)
 	if err != nil {
