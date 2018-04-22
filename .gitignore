@@ -13,6 +13,7 @@
 
 .env
 bin/*
+public/*
 vendor/*/
 .vscode/
 .idea
