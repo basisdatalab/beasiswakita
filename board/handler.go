@@ -36,6 +36,7 @@ func (h *BoardHandler) Create(w http.ResponseWriter, r *http.Request, _ httprout
 
 	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
 	if err != nil {
+		beasiswakita.Transaction.Rollback()
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
 		return

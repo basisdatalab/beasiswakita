@@ -33,5 +33,5 @@ func UpdateBoard(board beasiswakita.StudentBoard) (beasiswakita.StudentBoard, er
 		return board, errors.New("Board not found")
 	}
 
-	return board, nil
+	return currentBoard, nil
 }
