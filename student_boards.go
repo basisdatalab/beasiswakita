@@ -19,14 +19,15 @@ var boardState = map[int]string{
 }
 
 type StudentBoard struct {
-	ID          int       `db:"id" json:"id"`
-	Name        string    `db:"name" json:"name"`
-	Category    int       `db:"category" json:"category"`
-	Description string    `db:"description" json:"description"`
-	State       int       `db:"state" json:"state"`
-	UserID      int       `db:"user_id" json:"user_id"`
-	CreatedAt   time.Time `db:"created_at" json:"created_at"`
-	UpdatedAt   time.Time `db:"updated_at" json:"updated_at"`
+	ID            int       `db:"id" json:"id"`
+	Name          string    `db:"name" json:"name"`
+	Category      int       `db:"category" json:"category"`
+	Description   string    `db:"description" json:"description"`
+	State         int       `db:"state" json:"state"`
+	UserID        int       `db:"user_id" json:"user_id"`
+	ScholarshipID int       `db:"scholarship_id" json:"scholarship_id,omitempty"`
+	CreatedAt     time.Time `db:"created_at" json:"created_at"`
+	UpdatedAt     time.Time `db:"updated_at" json:"updated_at"`
 }
 
 func (s *StudentBoard) Validate() error {
