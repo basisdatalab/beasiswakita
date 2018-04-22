@@ -18,7 +18,14 @@ Make sure:
     ```
     Edit `.env` file according to your environment setup.
     ```env
+    # Fill this with random string
+    APP_KEY=50m3r4nd0m4w3s0m35tr1ng
+
+    # Change DB_USERNAME and DB_PASSWORD
     DEVELOPMENT_DATABASE_URL=DB_USERNAME:DB_PASSWORD@(127.0.0.1:3306)/beasiswakita_development
+
+    # Host to serve image PATH
+    BEASISWAKITA_HOST=http://localhost:8061
     ```
 3. Install dependencies
     ```
@@ -49,7 +56,10 @@ Run rollback to revert a migration
   ```
   $ make rollback
   ```
-
+If you add more dependencies to the project, don't forget to `dep ensure`
+  ```
+  $ dep ensure
+  ```
 ### Build Project
 Build project using build commnd.
   ```
@@ -59,7 +69,4 @@ Run project by executing:
   ```
   $ ./bin/beasiswakita
   ```
-If you add more dependencies to the project, don't forget to `dep ensure`
-  ```
-  $ dep ensure
-  ```
+Beasiswakita will run at port `:8061`
