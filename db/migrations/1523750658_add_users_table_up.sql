@@ -5,5 +5,6 @@ CREATE TABLE users (
 	role varchar(50) NOT NULL,
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
-	PRIMARY KEY (id)
+	PRIMARY KEY (id),
+	INDEX email_INDEX (email_address ASC)
 );

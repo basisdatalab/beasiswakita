@@ -14,5 +14,6 @@ CREATE TABLE organizations (
 	created_at datetime NOT NULL,
 	updated_at datetime NOT NULL,
 	PRIMARY KEY (id),
-	FOREIGN KEY (user_id) REFERENCES users (id)
+	FOREIGN KEY (user_id) REFERENCES users (id),
+	INDEX user_INDEX (user_id ASC)
 )
