@@ -29,9 +29,14 @@ func (o *Organization) Parse(data map[string]interface{}) error {
 	o.City = data["city"].(string)
 	o.Region = data["region"].(string)
 	o.Country = data["country"].(string)
-	o.Zipcode = data["zipcode"].(*string)
-	o.Website = data["website"].(*string)
-	o.Logo = data["logo"].(*string)
+
+	zipcode := data["zipcode"].(string)
+	website := data["website"].(string)
+	logo := data["logo"].(string)
+
+	o.Zipcode = &zipcode
+	o.Website = &website
+	o.Logo = &logo
 
 	return nil
 }
