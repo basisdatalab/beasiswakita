@@ -41,7 +41,7 @@ func (s *Student) Parse(data map[string]interface{}) error {
 	s.SchoolAddress = data["school_address"].(string)
 	s.SchoolCity = data["school_city"].(string)
 	s.SchoolRegion = data["school_region"].(string)
-	s.SchoolZipcode = data["school_zipcode"].(string)
+	s.SchoolZipcode = data["school_zipcode"].(*string)
 
 	return nil
 }
