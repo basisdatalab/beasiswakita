@@ -7,20 +7,20 @@ import (
 	"golang.org/x/crypto/bcrypt"
 )
 
-func AddUser(user beasiswakita.User) (beasiswakita.User, error) {
+func AddUser(user beasiswakita.User) (beasiswakita.User, int, error) {
 	err := user.ValidatePassword()
 	if err != nil {
-		return user, err
+		return user, 0, err
 	}
 
 	err = user.Validate()
 	if err != nil {
-		return user, err
+		return user, 0, err
 	}
 
 	hashed, err := bcrypt.GenerateFromPassword([]byte(user.Password), bcrypt.DefaultCost)
 	if err != nil {
-		return user, err
+		return user, 0, err
 	}
 
 	user.Password = string(hashed)
@@ -29,29 +29,30 @@ func AddUser(user beasiswakita.User) (beasiswakita.User, error) {
 
 	err = beasiswakita.Transaction.Insert(&user)
 	if err != nil {
-		return user, err
+		return user, 0, err
 	}
 
 	user.Password = ""
 	user.PasswordConfirm = ""
+	var profileID int
 
 	if user.Role == "organization" {
-		err = AddOrganization(user.ID, user.UserData)
+		profileID, err = AddOrganization(user.ID, user.UserData)
 	} else {
-		err = AddStudent(user.ID, user.UserData)
+		profileID, err = AddStudent(user.ID, user.UserData)
 	}
 	if err != nil {
-		return user, err
+		return user, 0, err
 	}
 
-	return user, nil
+	return user, profileID, nil
 }
 
-func AddOrganization(userID int, data map[string]interface{}) error {
+func AddOrganization(userID int, data map[string]interface{}) (int, error) {
 	var organization beasiswakita.Organization
 	err := organization.Parse(data)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	organization.CreatedAt = time.Now()
@@ -60,17 +61,17 @@ func AddOrganization(userID int, data map[string]interface{}) error {
 	organization.UserID = userID
 	err = beasiswakita.Transaction.Insert(&organization)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	return nil
+	return organization.ID, nil
 }
 
-func AddStudent(userID int, data map[string]interface{}) error {
+func AddStudent(userID int, data map[string]interface{}) (int, error) {
 	var student beasiswakita.Student
 	err := student.Parse(data)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
 	student.CreatedAt = time.Now()
@@ -79,8 +80,8 @@ func AddStudent(userID int, data map[string]interface{}) error {
 	student.UserID = userID
 	err = beasiswakita.Transaction.Insert(&student)
 	if err != nil {
-		return err
+		return 0, err
 	}
 
-	return nil
+	return student.ID, nil
 }

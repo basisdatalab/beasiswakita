@@ -31,7 +31,7 @@ func (h *UserHandler) Register(w http.ResponseWriter, r *http.Request, _ httprou
 		return
 	}
 
-	newUser, err := AddUser(user)
+	newUser, profileID, err := AddUser(user)
 	if err != nil {
 		beasiswakita.Transaction.Rollback()
 		response.Error(w, errors.InternalServerError)
@@ -49,6 +49,7 @@ func (h *UserHandler) Register(w http.ResponseWriter, r *http.Request, _ httprou
 
 	token, err := authentication.Authorize(authentication.Owner{
 		ID:           newUser.ID,
+		ProfileID:    profileID,
 		EmailAddress: newUser.EmailAddress,
 		Role:         newUser.Role,
 	}, newUser.EmailAddress)
