@@ -23,7 +23,12 @@ func ChangeState(ID int, state int) error {
 
 	s.UpdatedAt = time.Now()
 
-	col, err := beasiswakita.Transaction.Update(&s)
+	result, err := beasiswakita.Transaction.Exec("update scholarships set state = ? where id = ?", state, ID)
+	if err != nil {
+		return err
+	}
+
+	col, err := result.RowsAffected()
 	if err != nil {
 		return err
 	}
