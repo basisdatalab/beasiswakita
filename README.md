@@ -100,7 +100,7 @@ Beasiswakita will run at port `:8061`
    - 
    - 
 -> Akun admin dummy :
-   - username : basdat
+   - username : basdat@basdat.com
    - password : password
 
 ### beasiswakita.surge.sh/daftar
