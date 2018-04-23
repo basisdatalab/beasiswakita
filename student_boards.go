@@ -25,7 +25,7 @@ type StudentBoard struct {
 	Description   string    `db:"description" json:"description"`
 	State         int       `db:"state" json:"state"`
 	UserID        int       `db:"user_id" json:"user_id"`
-	ScholarshipID int       `db:"scholarship_id" json:"scholarship_id,omitempty"`
+	ScholarshipID *int      `db:"scholarship_id" json:"scholarship_id"`
 	CreatedAt     time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt     time.Time `db:"updated_at" json:"updated_at"`
 }
