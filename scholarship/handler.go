@@ -6,6 +6,8 @@ import (
 	"net/http"
 	"strconv"
 
+	"github.com/harkce/beasiswakita/board"
+
 	"github.com/harkce/beasiswakita"
 	"github.com/harkce/beasiswakita/errors"
 	"github.com/harkce/beasiswakita/server/response"
@@ -34,7 +36,7 @@ func (h *ScholarshipHandler) Create(w http.ResponseWriter, r *http.Request, _ ht
 	}
 
 	s.OrganizationID = owner.ProfileID
-
+	fmt.Println(owner)
 	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
 	if err != nil {
 		beasiswakita.Transaction.Rollback()
@@ -255,5 +257,59 @@ func (h *ScholarshipHandler) State(w http.ResponseWriter, r *http.Request, ps ht
 	}
 
 	response.OK(w, state)
+	return
+}
+
+func (h *ScholarshipHandler) AddWhislist(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
+	owner, err := authentication.Token(r.Header.Get("Authorization"), []string{"student"})
+	if err != nil {
+		response.Error(w, errors.Unauthorized)
+		log.Println(err)
+		return
+	}
+
+	ID := ps.ByName("scholarshipID")
+	sID, err := strconv.Atoi(ID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	s, err := GetScholarship(sID)
+	if err != nil {
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	b := CreateBoard(s)
+	b.UserID = owner.ID
+
+	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	createdBoard, err := board.CreateBoard(b)
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	err = beasiswakita.Transaction.Commit()
+	if err != nil {
+		beasiswakita.Transaction.Rollback()
+		response.Error(w, errors.InternalServerError)
+		log.Println(err)
+		return
+	}
+
+	response.OK(w, createdBoard)
 	return
 }
