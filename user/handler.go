@@ -26,6 +26,7 @@ func (h *UserHandler) Register(w http.ResponseWriter, r *http.Request, _ httprou
 
 	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
 	if err != nil {
+		beasiswakita.Transaction.Rollback()
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
 		return
