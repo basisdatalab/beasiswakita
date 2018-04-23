@@ -18,7 +18,7 @@ type Student struct {
 	SchoolAddress string    `db:"school_address" json:"school_address"`
 	SchoolCity    string    `db:"school_city" json:"school_city"`
 	SchoolRegion  string    `db:"school_region" json:"school_region"`
-	SchoolZipcode string    `db:"school_zipcode" json:"school_zipcode,omitempty"`
+	SchoolZipcode *string   `db:"school_zipcode" json:"school_zipcode,omitempty"`
 	CreatedAt     time.Time `db:"created_at" json:"created_at"`
 	UpdatedAt     time.Time `db:"updated_at" json:"updated_at"`
 	UserID        int       `db:"user_id" json:"-"`
