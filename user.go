@@ -25,13 +25,13 @@ func (u *User) Validate() error {
 }
 
 func (u *User) ValidatePassword() error {
-	if len(u.Password) < 6 || len(u.Password) > 16 {
-		return errors.New("Password must between 6-16 characters")
-	}
+	// if len(u.Password) < 6 || len(u.Password) > 16 {
+	//         return errors.New("Password must between 6-16 characters")
+	// }
 
-	if u.Password != u.PasswordConfirm {
-		return errors.New("Password not match")
-	}
+	// if u.Password != u.PasswordConfirm {
+	//         return errors.New("Password not match")
+	// }
 
 	return nil
 }
