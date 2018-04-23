@@ -70,3 +70,41 @@ Run project by executing:
   $ ./bin/beasiswakita
   ```
 Beasiswakita will run at port `:8061`
+
+## Beasiswakita endpoint
+
+### beasiswakita.surge.sh/
+-> Halaman ini untuk mengakses halaman utama
+ 
+### beasiswakita.surge.sh/board
+-> Halaman ini untuk mengakses halaman dashboard
+-> Requirement :
+   - Harus sudah dalam kondisi login sebagai user penerima beasiswa
+   - 
+
+### beasiswakita.surge.sh/search
+-> Halaman ini untuk mengakses halaman pencarian 
+
+### beasiswakita.surge.sh/detilBeasiswa
+-> Halaman ini untuk mengakses halaman lihat detil beasiswa
+
+### beasiswakita.surge.sh/partnership
+-> Halaman ini untuk halaman pendaftar bagi partnership 
+
+### beasiswakita.surge.sh/partnership/board
+-> Halaman ini digunakan sebagai halaman dashboard perusahaan atau instansi untuk membuat lowongan beasiswa
+
+### beasiswakita.surge.sh/login
+-> Halaman ini untuk mengakses halaman login
+-> Requirement :
+   - 
+   - 
+-> Akun admin dummy :
+   - username : basdat
+   - password : password
+
+### beasiswakita.surge.sh/daftar
+-> Halaman ini untuk mengakses halaman signup
+
+#endpoint
+
