@@ -12,10 +12,10 @@ import (
 
 // Owner is an authorized user
 type Owner struct {
-	ID           int
-	ProfileID    int
-	EmailAddress string
-	Role         string
+	ID           int    `json:"id"`
+	ProfileID    int    `json:"profile_id"`
+	EmailAddress string `json:"email_address"`
+	Role         string `json:"role"`
 }
 
 type owner struct {

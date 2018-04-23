@@ -114,10 +114,18 @@ func (h *UserHandler) Login(w http.ResponseWriter, r *http.Request, _ httprouter
 		Role:         checkUser.Role,
 	}, checkUser.EmailAddress)
 
+	var owner authentication.Owner
+	owner.ID = checkUser.ID
+	owner.ProfileID = int(profileID)
+	owner.EmailAddress = checkUser.EmailAddress
+	owner.Role = checkUser.Role
+
 	response.OK(w, struct {
-		Token string `json:"token"`
+		Token string               `json:"token"`
+		Owner authentication.Owner `json:"owner"`
 	}{
 		token,
+		owner,
 	})
 }
 
