@@ -8,9 +8,9 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/harkce/beasiswakita/authentication"
-	"github.com/harkce/beasiswakita/errors"
-	"github.com/harkce/beasiswakita/server/response"
+	"github.com/basisdatalab/beasiswakita/authentication"
+	"github.com/basisdatalab/beasiswakita/errors"
+	"github.com/basisdatalab/beasiswakita/server/response"
 	"github.com/julienschmidt/httprouter"
 )
 
@@ -58,7 +58,7 @@ func (h *FileHandler) Upload(w http.ResponseWriter, r *http.Request, _ httproute
 
 func (h *FileHandler) Retrieve(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
 	filename := ps.ByName("filename")
-	path := os.Getenv("GOPATH") + "/src/github.com/harkce/beasiswakita/public/" + filename
+	path := os.Getenv("GOPATH") + "/src/github.com/basisdatalab/beasiswakita/public/" + filename
 
 	if _, err := os.Stat(path); os.IsNotExist(err) {
 		response.Error(w, errors.NotFound)
@@ -90,7 +90,7 @@ func extensionAllowed(extension string) bool {
 }
 
 func saveFile(filename string, file io.Reader) error {
-	path := os.Getenv("GOPATH") + "/src/github.com/harkce/beasiswakita/public/" + filename
+	path := os.Getenv("GOPATH") + "/src/github.com/basisdatalab/beasiswakita/public/" + filename
 	os.MkdirAll(filepath.Dir(path), os.ModePerm)
 
 	f, err := os.OpenFile(path, os.O_WRONLY|os.O_CREATE, 0666)

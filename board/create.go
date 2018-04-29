@@ -3,7 +3,7 @@ package board
 import (
 	"time"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func CreateBoard(board beasiswakita.StudentBoard) (beasiswakita.StudentBoard, error) {

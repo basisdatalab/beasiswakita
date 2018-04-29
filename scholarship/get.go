@@ -3,7 +3,7 @@ package scholarship
 import (
 	"fmt"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func GetScholarships(filter map[string]string, limit int, offset int) ([]beasiswakita.Scholarship, int, error) {

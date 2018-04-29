@@ -1,7 +1,7 @@
 package board
 
 import (
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func GetBoards(ID int) ([]beasiswakita.StudentBoard, error) {

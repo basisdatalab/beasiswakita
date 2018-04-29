@@ -7,14 +7,14 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/harkce/beasiswakita"
-	"github.com/harkce/beasiswakita/server"
+	"github.com/basisdatalab/beasiswakita"
+	"github.com/basisdatalab/beasiswakita/server"
 	"github.com/subosito/gotenv"
 )
 
 func main() {
 	log.Println("Starting beasiswakita...")
-	gotenv.Load(os.Getenv("GOPATH") + "/src/github.com/harkce/beasiswakita/.env")
+	gotenv.Load(os.Getenv("GOPATH") + "/src/github.com/basisdatalab/beasiswakita/.env")
 
 	dsn := os.Getenv("DEVELOPMENT_DATABASE_URL")
 

@@ -3,7 +3,7 @@ package scholarship
 import (
 	"time"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func CreateScholarship(s beasiswakita.Scholarship) (beasiswakita.Scholarship, error) {

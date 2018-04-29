@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func UpdateScholarship(s beasiswakita.Scholarship) (beasiswakita.Scholarship, error) {

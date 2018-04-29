@@ -3,7 +3,7 @@ package board
 import (
 	"errors"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func DeleteBoard(board beasiswakita.StudentBoard) (beasiswakita.StudentBoard, error) {

@@ -1,7 +1,7 @@
 package user
 
 import (
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func GetUser(ID int) (interface{}, error) {

@@ -3,7 +3,7 @@ package user
 import (
 	"time"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 	"golang.org/x/crypto/bcrypt"
 )
 

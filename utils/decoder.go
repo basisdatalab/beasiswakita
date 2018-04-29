@@ -6,7 +6,7 @@ import (
 	"io/ioutil"
 	"net/http"
 
-	"github.com/harkce/beasiswakita/errors"
+	"github.com/basisdatalab/beasiswakita/errors"
 )
 
 func Decode(r *http.Request, object interface{}) error {

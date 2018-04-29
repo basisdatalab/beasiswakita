@@ -4,13 +4,13 @@ import (
 	"os"
 	"testing"
 
-	"github.com/harkce/beasiswakita/authentication"
+	"github.com/basisdatalab/beasiswakita/authentication"
 	"github.com/subosito/gotenv"
 	"golang.org/x/crypto/bcrypt"
 )
 
 func TestMain(m *testing.M) {
-	gotenv.Load(os.Getenv("GOPATH") + "/src/github.com/harkce/beasiswakita/.env")
+	gotenv.Load(os.Getenv("GOPATH") + "/src/github.com/basisdatalab/beasiswakita/.env")
 }
 
 func TestAuthenticate(t *testing.T) {

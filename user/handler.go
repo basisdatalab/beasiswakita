@@ -4,11 +4,11 @@ import (
 	"log"
 	"net/http"
 
-	"github.com/harkce/beasiswakita"
-	"github.com/harkce/beasiswakita/authentication"
-	"github.com/harkce/beasiswakita/errors"
-	"github.com/harkce/beasiswakita/server/response"
-	"github.com/harkce/beasiswakita/utils"
+	"github.com/basisdatalab/beasiswakita"
+	"github.com/basisdatalab/beasiswakita/authentication"
+	"github.com/basisdatalab/beasiswakita/errors"
+	"github.com/basisdatalab/beasiswakita/server/response"
+	"github.com/basisdatalab/beasiswakita/utils"
 
 	"github.com/julienschmidt/httprouter"
 )

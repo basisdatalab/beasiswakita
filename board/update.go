@@ -4,7 +4,7 @@ import (
 	"errors"
 	"time"
 
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func UpdateBoard(board beasiswakita.StudentBoard) (beasiswakita.StudentBoard, error) {

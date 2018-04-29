@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"path/filepath"
 
-	"github.com/harkce/beasiswakita/errors"
+	"github.com/basisdatalab/beasiswakita/errors"
 )
 
 type ErrorInfo struct {

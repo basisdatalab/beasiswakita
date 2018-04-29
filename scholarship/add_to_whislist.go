@@ -1,7 +1,7 @@
 package scholarship
 
 import (
-	"github.com/harkce/beasiswakita"
+	"github.com/basisdatalab/beasiswakita"
 )
 
 func CreateBoard(s beasiswakita.Scholarship) beasiswakita.StudentBoard {
