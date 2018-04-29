@@ -9,8 +9,8 @@ Make sure:
 
 1. Get this repository
     ```
-    $ go get github.com/harkce/beasiswakita
-    $ cd $GOPATH/src/github.com/harkce/beasiswakita/
+    $ go get github.com/basisdatalab/beasiswakita
+    $ cd $GOPATH/src/github.com/basisdatalab/beasiswakita/
     ```
 2. Set up development environtment
     ```
@@ -70,6 +70,10 @@ Run project by executing:
   $ ./bin/beasiswakita
   ```
 Beasiswakita will run at port `:8061`
+
+### TODO
+- [ ] Create test files
+- [ ] Better documentation
 
 ## Beasiswakita endpoint
 
