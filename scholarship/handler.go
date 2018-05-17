@@ -36,7 +36,6 @@ func (h *ScholarshipHandler) Create(w http.ResponseWriter, r *http.Request, _ ht
 	}
 
 	s.OrganizationID = owner.ProfileID
-	fmt.Println(owner)
 	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
 	if err != nil {
 		beasiswakita.Transaction.Rollback()
@@ -206,12 +205,12 @@ func (h *ScholarshipHandler) Update(w http.ResponseWriter, r *http.Request, _ ht
 }
 
 func (h *ScholarshipHandler) State(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, err := authentication.Token(r.Header.Get("Authorization"), []string{"organization"})
-	if err != nil {
-		response.Error(w, errors.Unauthorized)
-		log.Println(err)
-		return
-	}
+	// _, err := authentication.Token(r.Header.Get("Authorization"), []string{"organization"})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
 
 	ID := ps.ByName("scholarshipID")
 	sID, err := strconv.Atoi(ID)

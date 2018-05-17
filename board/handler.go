@@ -9,7 +9,6 @@ import (
 	"github.com/basisdatalab/beasiswakita/errors"
 	"github.com/basisdatalab/beasiswakita/utils"
 
-	"github.com/basisdatalab/beasiswakita/authentication"
 	"github.com/basisdatalab/beasiswakita/server/response"
 	"github.com/julienschmidt/httprouter"
 )
@@ -17,22 +16,22 @@ import (
 type BoardHandler struct{}
 
 func (h *BoardHandler) Create(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
-	if err != nil {
-		response.Error(w, errors.Unauthorized)
-		log.Println(err)
-		return
-	}
+	// owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
 
 	var board beasiswakita.StudentBoard
-	err = utils.Decode(r, &board)
+	err := utils.Decode(r, &board)
 	if err != nil {
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
 		return
 	}
 
-	board.UserID = owner.ID
+	// board.UserID = owner.ID
 
 	beasiswakita.Transaction, err = beasiswakita.DbMap.Begin()
 	if err != nil {
@@ -63,15 +62,15 @@ func (h *BoardHandler) Create(w http.ResponseWriter, r *http.Request, _ httprout
 }
 
 func (h *BoardHandler) Update(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	_, err := authentication.Token(r.Header.Get("Authorization"), []string{})
-	if err != nil {
-		response.Error(w, errors.Unauthorized)
-		log.Println(err)
-		return
-	}
+	// _, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
 
 	var board beasiswakita.StudentBoard
-	err = utils.Decode(r, &board)
+	err := utils.Decode(r, &board)
 	if err != nil {
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
@@ -107,12 +106,12 @@ func (h *BoardHandler) Update(w http.ResponseWriter, r *http.Request, _ httprout
 }
 
 func (h *BoardHandler) State(w http.ResponseWriter, r *http.Request, ps httprouter.Params) {
-	_, err := authentication.Token(r.Header.Get("Authorization"), []string{"student"})
-	if err != nil {
-		response.Error(w, errors.Unauthorized)
-		log.Println(err)
-		return
-	}
+	// _, err := authentication.Token(r.Header.Get("Authorization"), []string{"student"})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
 
 	ID := ps.ByName("boardID")
 	boardID, err := strconv.Atoi(ID)
@@ -162,15 +161,15 @@ func (h *BoardHandler) State(w http.ResponseWriter, r *http.Request, ps httprout
 }
 
 func (h *BoardHandler) Delete(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	_, err := authentication.Token(r.Header.Get("Authorization"), []string{})
-	if err != nil {
-		response.Error(w, errors.Unauthorized)
-		log.Println(err)
-		return
-	}
+	// _, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
 
 	var board beasiswakita.StudentBoard
-	err = utils.Decode(r, &board)
+	err := utils.Decode(r, &board)
 	if err != nil {
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
@@ -206,14 +205,28 @@ func (h *BoardHandler) Delete(w http.ResponseWriter, r *http.Request, _ httprout
 }
 
 func (h *BoardHandler) Get(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-	owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	// owner, err := authentication.Token(r.Header.Get("Authorization"), []string{})
+	// if err != nil {
+	// 	response.Error(w, errors.Unauthorized)
+	// 	log.Println(err)
+	// 	return
+	// }
+
+	params := r.URL.Query()
+	IDs, ok := params["key"]
+	if !ok {
+		response.Error(w, errors.InternalServerError)
+		log.Println("Unprocessable entity: ID")
+		return
+	}
+	ID, err := strconv.Atoi(IDs[0])
 	if err != nil {
-		response.Error(w, errors.Unauthorized)
+		response.Error(w, errors.InternalServerError)
 		log.Println(err)
 		return
 	}
 
-	boards, err := GetBoards(owner.ID)
+	boards, err := GetBoards(ID)
 	if err != nil {
 		response.Error(w, errors.InternalServerError)
 		log.Println(err)
