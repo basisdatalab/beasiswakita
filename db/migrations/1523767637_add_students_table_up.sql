@@ -1,7 +1,7 @@
 CREATE TABLE students (
 	id int(11) NOT NULL AUTO_INCREMENT,
 	name varchar(100) NOT NULL DEFAULT '',
-	birthdate date NOT NULL DEFAULT '',
+	birthdate date NOT NULL DEFAULT '1996-03-17',
 	address varchar(255) NOT NULL DEFAULT '',
 	city varchar(50) NOT NULL DEFAULT '',
 	region varchar(50) NOT NULL DEFAULT '',
